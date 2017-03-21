@@ -37,9 +37,30 @@
   };
 
   function Row(coffeeOrder) {
+    /* extra processing for the chapter 11 silver challenge, which we didn't need to do */
+    var classes = 'checkbox ';
+    if (coffeeOrder.strength >= 85) {
+      classes += 'checkbox-red ';
+    }
+    else if (coffeeOrder.strength <= 15) {
+      classes += 'checkbox-green ';
+    }
+    else {
+      classes += 'checkbox-yellow ';
+    }
+    if (coffeeOrder.flavor == 'caramel') {
+      classes += 'caramel';
+    }
+    else if (coffeeOrder.flavor == 'mocha') {
+      classes += 'mocha';
+    }
+    else if (coffeeOrder.flavor == 'almond') {
+      classes += 'almond';
+    }
+    /* end extra silver challenge stuff */
     var $div = $('<div></div>', {
       'data-coffee-order': 'checkbox',
-      'class': 'checkbox'
+      'class': classes,
     });
     var $label = $('<label></label>');
 

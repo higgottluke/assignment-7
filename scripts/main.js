@@ -1,3 +1,4 @@
+/* global $ */
 
 (function (window) {
   'use strict';
@@ -7,6 +8,7 @@
   var Truck = App.Truck;
   var DataStore = App.DataStore;
   var FormHandler = App.FormHandler;
+  var Validation = App.Validation;
   var CheckList = App.CheckList;
   var myTruck = new Truck('ncc-1701', new DataStore());
   window.myTruck = myTruck;
@@ -17,6 +19,7 @@
     myTruck.createOrder.call(myTruck, data);
     checkList.addRow.call(checkList, data);
   });
+  formHandler.addInputHandler(Validation.isCompanyEmail);
   console.log(formHandler);
 
 })(window);
@@ -39,6 +42,23 @@ if ($slider) {
     }
   });
 }
+var $order = $('#coffeeOrder');
+$order.on('input', function (event) {
+  if (!window.App.Validation.isBadDecaf($order[0].value, $slider[0].value)) {
+    event.target.setCustomValidity('');
+  } else {
+    var message = "You can't order decaf coffee with a caffeine rating that high!";
+    event.target.setCustomValidity(message);
+  }
+});
+$slider.on('input', function (event) {
+  if (!window.App.Validation.isBadDecaf($order[0].value, $slider[0].value)) {
+    event.target.setCustomValidity('');
+  } else {
+    var message = "You can't order decaf coffee with a caffeine rating that high!";
+    event.target.setCustomValidity(message);
+  }
+});
 /*
 // Gold Challenge
 $('[data-coffee-order]="form"').on('change', function () {
